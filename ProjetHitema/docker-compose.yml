@@ -1,23 +1,15 @@
 version: '3.8'
 services:
-  jupyter:
-    image: jupyter/base-notebook:latest
+  web:
+    build: .
     volumes:
-      - ./notebooks:/home/jovyan/work
-    ports:
-      - "8888:8888"
-
+      - .:/app
+    depends_on:
+      - db
   db:
     image: mysql:5.7
     environment:
-      MYSQL_ROOT_PASSWORD: fantik
-      MYSQL_DATABASE: formations
-      MYSQL_USER: fantik
-      MYSQL_PASSWORD: fantik
+      MYSQL_ROOT_PASSWORD: 
+      MYSQL_DATABASE: test
     ports:
-      - "3366:3366"
-    volumes:
-      - db_data:/var/lib/mysql
-
-volumes:
-  db_data:
+      - "3306:3306"
