@@ -9,6 +9,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 from selenium.webdriver.chrome.options import Options
+import pandas as pd
+from sqlalchemy import create_engine
 
 options = Options()
 options.add_argument("--headless") 
@@ -27,10 +29,10 @@ def create_mysql_connection():
     """Crée une connexion à la base de données MySQL."""
     try:
         connection = mysql.connector.connect(
-            host='localhost',
+            host='db',  # Utilisez le nom du service défini dans docker-compose.yml
             user='root',
-            password='test',  
-            database='test' 
+            password='test',  # Assurez-vous que cela correspond à MYSQL_ROOT_PASSWORD dans docker-compose.yml
+            database='test'
         )
         print("Connexion à MySQL réussie")
         return connection
@@ -116,3 +118,7 @@ for category in categories:
 driver.quit()
 if connection is not None:
     connection.close()
+
+engine = create_engine("mysql+mysqlconnector://root:@localhost/test")
+df = pd.read_sql_table('formations', engine)
+print(df)

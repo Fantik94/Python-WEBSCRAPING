@@ -6,10 +6,23 @@ services:
       - .:/app
     depends_on:
       - db
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=test
+      - MYSQL_DATABASE=test
+    networks:
+      - webnet
   db:
     image: mysql:5.7
+    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: test
       MYSQL_DATABASE: test
     ports:
       - "3306:3306"
+    networks:
+      - webnet
+
+networks:
+  webnet:
