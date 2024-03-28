@@ -99,4 +99,26 @@ L'objectif de cette section est d'extraire automatiquement des informations sur 
     driver.quit()
     ```
 
-Ce script permet d'automatiser la récupération d'informations précieuses sur les formations proposées par H3 Hitema, facilitant l'analyse et le partage de ces informations.
+Ce script permet d'automatiser la récupération d'informations précieuses sur les formations proposées par H3 Hitema, pour savoir si cette école nous ment ou non.
+
+## Exemple de Sortie
+
+Voici un aperçu des informations extraites du site h3hitema.fr, illustrant les données recueillies concernant différentes formations disponibles. Cet exemple montre comment les informations sont structurées et présentées par le script.
+
+```
+Catégorie: BTS INFORMATIQUE (BAC+2)
+Titre de la formation: BTS CIEL Cybersécurité
+Badges: Aucun
+Description: option IR
+Lien de la formation: https://www.h3hitema.fr/formation/bts-cybersecurite-option-ir/
+-----------
+Titre de la formation: BTS SIO
+Badges: ALTERNANCE, FORMATION INITIALE
+Description: option SLAM
+Lien de la formation: https://www.h3hitema.fr/formation/bts-sio-option-slam/
+-----------
+Titre de la formation: BTS SIO
+Badges: ALTERNANCE, FORMATION INITIALE
+Description: option SISR
+Lien de la formation: https://www.h3hitema.fr/formation/bts-sio-option-sisr/
+```
