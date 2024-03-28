@@ -169,5 +169,7 @@ print(df)
 ```
 
 ### Capture d'écran des données bien insérées dans la bdd 
+![Phpmyadmin](./image.png)
+![Phpmyadmin](image.png)
 ![Phpmyadmin](/image.png)
 
