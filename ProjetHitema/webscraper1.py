@@ -8,6 +8,14 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
+from selenium.webdriver.chrome.options import Options
+
+options = Options()
+options.add_argument("--headless") 
+options.add_argument("--no-sandbox") 
+options.add_argument("--disable-dev-shm-usage")  
+
+driver = webdriver.Chrome(options=options)
 
 # Définition de la fonction pour analyser les arguments de ligne de commande
 def parse_arguments():
@@ -21,7 +29,7 @@ def create_mysql_connection():
         connection = mysql.connector.connect(
             host='localhost',
             user='root',
-            password='',  
+            password='test',  
             database='test' 
         )
         print("Connexion à MySQL réussie")
@@ -60,12 +68,12 @@ def highlight(element):
 
 args = parse_arguments()
 
-service = Service(ChromeDriverManager().install())
-driver = webdriver.Chrome(service=service)
+
 driver.get(args.url)
 time.sleep(2)
 
 cookie_button = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="cmplz-cookiebanner-container"]/div/div[6]/button[1]')))
+time.sleep(2)
 cookie_button.click()
 
 def incremental_scroll(driver, increments=10, delay=1):

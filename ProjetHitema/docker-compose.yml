@@ -9,7 +9,7 @@ services:
   db:
     image: mysql:5.7
     environment:
-      MYSQL_ROOT_PASSWORD: 
+      MYSQL_ROOT_PASSWORD: test
       MYSQL_DATABASE: test
     ports:
       - "3306:3306"
