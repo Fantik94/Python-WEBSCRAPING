@@ -28,7 +28,7 @@ def parse_arguments():
 def create_mysql_connection():
     """Crée une connexion à la base de données MySQL."""
     try:
-        host = os.getenv('MYSQL_HOST', 'localhost')
+        host = os.getenv('MYSQL_HOST', 'db')
         user = os.getenv('MYSQL_USER', 'root')
         password = os.getenv('MYSQL_PASSWORD', 'test')
         database = os.getenv('MYSQL_DATABASE', 'test')
@@ -124,6 +124,6 @@ driver.quit()
 if connection is not None:
     connection.close()
 
-engine = create_engine("mysql+mysqlconnector://root:@db/test")
+engine = create_engine("mysql+mysqlconnector://root:test@db/test")
 df = pd.read_sql_table('formations', engine)
 print(df)
