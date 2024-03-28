@@ -72,7 +72,7 @@ L'objectif de cette section est d'extraire automatiquement des informations sur 
     cookie_button.click()
     ```
 
-4. **Défilement incrémentiel :** Pour s'assurer que toutes les informations sont chargées sur la page, un défilement incrémentiel est effectué.
+4. **Défilement incrémentiel :** Pour s'assurer que toutes les informations sont chargées sur la page, un défilement incrémentiel est effectué. (Le site est super mal fait donc on doit faire comme ça, scroller tout en bas ne charge pas le contenu de la page)
     ```python
     def incremental_scroll(driver, increments=10, delay=1):
         for i in range(increments):
@@ -121,4 +121,49 @@ Titre de la formation: BTS SIO
 Badges: ALTERNANCE, FORMATION INITIALE
 Description: option SISR
 Lien de la formation: https://www.h3hitema.fr/formation/bts-sio-option-sisr/
+```
+
+## Gestion de la Base de Données et Affichage des Données
+
+### Connexion à MySQL
+
+Le script établit une connexion à la base de données MySQL en utilisant les variables d'environnement pour la configuration. Cela permet une connexion sécurisée et flexible aux bases de données.
+
+```python
+host = os.getenv('MYSQL_HOST', 'db')
+user = os.getenv('MYSQL_USER', 'root')
+password = os.getenv('MYSQL_PASSWORD', 'test')
+database = os.getenv('MYSQL_DATABASE', 'test')
+
+connection = mysql.connector.connect(
+    host=host,
+    user=user,
+    password=password,  
+    database=database
+)
+```
+
+Création et Insertion dans la Table
+Le script vérifie si la table formations existe. Si ce n'est pas le cas, il la crée. Ensuite, il insère les données des formations extraites.
+
+```python
+cursor.execute('''
+    CREATE TABLE IF NOT EXISTS formations (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        categorie TEXT NOT NULL,
+        titre TEXT NOT NULL,
+        badges TEXT,
+        description TEXT,
+        lien TEXT NOT NULL
+    );
+''')
+```
+
+Affichage des Données avec Pandas
+Après l'insertion des données dans la base de données, le script utilise pandas pour lire et afficher les données sous forme de DataFrame, offrant une vue claire et structurée des informations.
+
+```python
+engine = create_engine("mysql+mysqlconnector://root:test@db/test")
+df = pd.read_sql_table('formations', engine)
+print(df)
 ```
