@@ -1,5 +1,6 @@
 import argparse
 import mysql.connector
+import os
 from mysql.connector import Error
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -19,7 +20,6 @@ options.add_argument("--disable-dev-shm-usage")
 
 driver = webdriver.Chrome(options=options)
 
-# Définition de la fonction pour analyser les arguments de ligne de commande
 def parse_arguments():
     parser = argparse.ArgumentParser(description='Web scraper for formations.')
     parser.add_argument('--url', help='URL à webscrap', required=True)
@@ -28,11 +28,16 @@ def parse_arguments():
 def create_mysql_connection():
     """Crée une connexion à la base de données MySQL."""
     try:
+        host = os.getenv('MYSQL_HOST', 'localhost')
+        user = os.getenv('MYSQL_USER', 'root')
+        password = os.getenv('MYSQL_PASSWORD', 'test')
+        database = os.getenv('MYSQL_DATABASE', 'test')
+
         connection = mysql.connector.connect(
-            host='db',  # Utilisez le nom du service défini dans docker-compose.yml
-            user='root',
-            password='test',  # Assurez-vous que cela correspond à MYSQL_ROOT_PASSWORD dans docker-compose.yml
-            database='test'
+            host=host,
+            user=user,
+            password=password,  
+            database=database
         )
         print("Connexion à MySQL réussie")
         return connection
@@ -119,6 +124,6 @@ driver.quit()
 if connection is not None:
     connection.close()
 
-engine = create_engine("mysql+mysqlconnector://root:@localhost/test")
+engine = create_engine("mysql+mysqlconnector://root:@db/test")
 df = pd.read_sql_table('formations', engine)
 print(df)
