@@ -49,7 +49,7 @@ L'objectif de cette section est d'extraire automatiquement des informations sur 
 
 1. **Installation des packages nécessaires :** On commence par installer Selenium et d'autres bibliothèques utiles pour le scraping et l'interaction avec les navigateurs web.
     ```python
-    !pip install selenium webdriver-manager pandas sqlalchemy pymongo
+    !pip install selenium webdriver-manager pandas sqlalchemy mysql-connector-python
     ```
 
 2. **Initialisation du navigateur :** Utilisation de Selenium pour ouvrir une instance de Chrome et naviguer vers la page des formations informatiques de H3 Hitema.
@@ -127,7 +127,7 @@ Lien de la formation: https://www.h3hitema.fr/formation/bts-sio-option-sisr/
 
 ### Connexion à MySQL
 
-Le script établit une connexion à la base de données MySQL en utilisant les variables d'environnement pour la configuration. Cela permet une connexion sécurisée et flexible aux bases de données.
+1. Le script établit une connexion à la base de données MySQL en utilisant les variables d'environnement pour la configuration. Cela permet une connexion sécurisée et flexible aux bases de données.
 
 ```python
 host = os.getenv('MYSQL_HOST', 'db')
@@ -143,7 +143,7 @@ connection = mysql.connector.connect(
 )
 ```
 
-Création et Insertion dans la Table
+2. Création et Insertion dans la Table
 Le script vérifie si la table formations existe. Si ce n'est pas le cas, il la crée. Ensuite, il insère les données des formations extraites.
 
 ```python
@@ -159,7 +159,7 @@ cursor.execute('''
 ''')
 ```
 
-Affichage des Données avec Pandas.
+3. Affichage des Données avec Pandas.
 Après l'insertion des données dans la base de données, le script utilise pandas pour lire et afficher les données sous forme de DataFrame.
 
 ```python
@@ -170,6 +170,4 @@ print(df)
 
 ### Capture d'écran des données bien insérées dans la bdd 
 ![Phpmyadmin](./image.png)
-![Phpmyadmin](image.png)
-![Phpmyadmin](/image.png)
 
