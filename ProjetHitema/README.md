@@ -159,11 +159,15 @@ cursor.execute('''
 ''')
 ```
 
-Affichage des Données avec Pandas
-Après l'insertion des données dans la base de données, le script utilise pandas pour lire et afficher les données sous forme de DataFrame, offrant une vue claire et structurée des informations.
+Affichage des Données avec Pandas.
+Après l'insertion des données dans la base de données, le script utilise pandas pour lire et afficher les données sous forme de DataFrame.
 
 ```python
 engine = create_engine("mysql+mysqlconnector://root:test@db/test")
 df = pd.read_sql_table('formations', engine)
 print(df)
 ```
+
+### Capture d'écran des données bien insérées dans la bdd 
+![Phpmyadmin](/image.png)
+
